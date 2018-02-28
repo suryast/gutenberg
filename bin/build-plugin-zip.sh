@@ -79,8 +79,6 @@ status "Installing dependencies..."
 npm install
 status "Generating build..."
 npm run build
-status "Generating translation messages..."
-npm run gettext-strings
 
 # Remove any existing zip file
 rm -f gutenberg.zip
