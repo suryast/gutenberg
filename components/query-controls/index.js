@@ -1,23 +1,19 @@
 /**
- * External dependencies
- */
-import { noop } from 'lodash';
-
-/**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { RangeControl, SelectControl } from '@wordpress/components';
 
 /**
  * Internal dependencies
  */
+import { RangeControl, SelectControl } from '../';
 import CategorySelect from './category-select';
 
 const DEFAULT_MIN_ITEMS = 1;
 const DEFAULT_MAX_ITEMS = 100;
 
-export default function QueryPanel( {
+export default function QueryControls( {
+	categories,
 	category,
 	numberOfItems,
 	order,
@@ -26,11 +22,11 @@ export default function QueryPanel( {
 	minItems = DEFAULT_MIN_ITEMS,
 	onCategoryChange,
 	onNumberOfItemsChange,
-	onOrderChange = noop,
-	onOrderByChange = noop,
+	onOrderChange,
+	onOrderByChange,
 } ) {
 	return [
-		( onOrderChange || onOrderByChange ) && (
+		( onOrderChange && onOrderByChange ) && (
 			<SelectControl
 				key="query-panel-select"
 				label={ __( 'Order by' ) }
@@ -69,6 +65,7 @@ export default function QueryPanel( {
 		onCategoryChange && (
 			<CategorySelect
 				key="query-panel-category-select"
+				categories={ categories }
 				label={ __( 'Category' ) }
 				noOptionLabel={ __( 'All' ) }
 				selectedCategory={ category }
